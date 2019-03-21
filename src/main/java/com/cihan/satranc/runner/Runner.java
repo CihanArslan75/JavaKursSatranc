@@ -16,7 +16,7 @@ public class Runner {
 		obstacles.add(new Point(4, 2));
 		obstacles.add(new Point(2, 3));
 		int result =s.stonesAttack(n, stone, obstacles,Stones.BISHOP.toString());
-		System.out.println("aaa:"+s.pointRookList);
+		System.out.println("aaa:"+s.pointList);
 		System.out.println("result:"+result);
 	}
 

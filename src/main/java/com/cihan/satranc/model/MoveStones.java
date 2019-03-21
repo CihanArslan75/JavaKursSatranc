@@ -13,10 +13,12 @@ public class MoveStones {
 	//queen   vezir
 	//obstacles kendi takımının taşları
 	
-	public List<Point> pointKingList  = new ArrayList<Point>();
-	public List<Point> pointQueenList = new ArrayList<Point>();
-	public List<Point> pointRookList  = new ArrayList<Point>();
+	public List<Point> pointList  = new ArrayList<Point>();
 	
+	public List<Point> getPointList() {
+		return pointList;
+	}
+		
 	public int stonesAttack(int n,Point stone ,Set<Point> obstacles,String stoneType) {
 		int summ=0;
 		if(stoneType.equals(Stones.KING.toString()))
@@ -28,11 +30,11 @@ public class MoveStones {
 			summ=Arrays.stream(Direction.values()).mapToInt(d->queenAttack(n, stone, obstacles,d)).sum();
 		}
 		else if(stoneType.equals(Stones.ROOK.toString()))
-		{   Arrays.stream(Direction.values()).filter(s->s.toString().length()==1).forEach(System.out::println);
+		{  //Arrays.stream(Direction.values()).filter(s->s.toString().length()==1).forEach(System.out::println);
 			summ=Arrays.stream(Direction.values()).filter(s->s.toString().length()==1).mapToInt(d->queenAttack(n, stone, obstacles,d)).sum();
 		}
 		else if(stoneType.equals(Stones.BISHOP.toString()))
-		{   Arrays.stream(Direction.values()).filter(s->s.toString().length()==2).forEach(System.out::println);
+		{   //Arrays.stream(Direction.values()).filter(s->s.toString().length()==2).forEach(System.out::println);
 			summ=Arrays.stream(Direction.values()).filter(s->s.toString().length()==2).mapToInt(d->queenAttack(n, stone, obstacles,d)).sum();
 		}
 		return summ;	
@@ -46,7 +48,7 @@ public class MoveStones {
 		// Dolayısıyla kendi elemanının bulunduğu directiondaki arkadaki diğer noktalara bakmaz.
 		while (isInside(n,point) && !obstacles.contains(point) ) {   
 			result++;
-			pointQueenList.add(point);
+			pointList.add(point);
 			point = direction.move(point);
 		}
 		return result;
@@ -58,12 +60,11 @@ public class MoveStones {
 		if (isInside(n,point) && !obstacles.contains(point) ) 
 		{   
 			result++;
-			pointKingList.add(point);
+			pointList.add(point);
 			point = direction.move(point);
 		}
 		return result;
 	}
-	
 	
 	private boolean isInside(int n,Point p) {
 		return 0 <= p.getX() && p.getX()<=n && 0<= p.getY() && p.getY()<=n;
