@@ -1,6 +1,7 @@
 package com.cihan.satranc.util;
 
 import java.awt.Point;
+import java.util.Arrays;
 
 public enum Direction {
 		N(0,1) ,  // values N, NE
@@ -25,4 +26,5 @@ public enum Direction {
 			return result;
 		
 		}	
+	
 }
