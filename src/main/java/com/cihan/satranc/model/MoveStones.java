@@ -17,14 +17,7 @@ public class MoveStones {
 	
 	public List<Point> pointList  = new ArrayList<Point>();   // taşın gidebileceği yerler
 	public List<Point> pointPawnList = new ArrayList<Point>();   // piyonun karşı takımdan alabileceği koordinatlar
-	Direction[][] KnightAttackArray = { {Direction.E,Direction.N,Direction.N},
-										{Direction.W,Direction.N,Direction.N},
-										{Direction.E,Direction.S,Direction.S},
-										{Direction.W,Direction.S,Direction.S},
-										{Direction.W,Direction.W,Direction.S},
-										{Direction.W,Direction.W,Direction.N},
-										{Direction.E,Direction.E,Direction.S},
-										{Direction.E,Direction.E,Direction.N}};
+	
 	public List<Point> getPointList() {
 		return pointList;
 	}
@@ -49,7 +42,8 @@ public class MoveStones {
 		}
 		else if(stoneType.equals(Stones.KNIGHT.toString()))
 		{  
-			summ=Arrays.stream(KnightAttackArray).mapToInt(d->knightAttack(n, stone, obstacles,d)).sum();
+			//summ=Arrays.stream(KnightAttackArray).mapToInt(d->knightAttack(n, stone, obstacles,d)).sum();
+			summ=Arrays.stream(DirectionKnight.values()).mapToInt(d->knightAttack(n, stone, obstacles,d)).sum();
 		}
 		else if(stoneType.equals(Stones.PAWN.toString()) && Runner.player==1)
 		{  
@@ -88,27 +82,14 @@ public class MoveStones {
 		return result;
 	}
 	
-	private int knightAttack(int n,Point stone ,Set<Point> obstacles,Direction[] direction) {
+	private int knightAttack(int n,Point stone ,Set<Point> obstacles,DirectionKnight directionKnight) {
 		int result = 0;  
-		int sayi=1;   
-		Point point = null ;
-		for (Direction direction1 : direction ) {
-		      if(sayi==1 ) 
-		      { 
-		    	  point =direction1.move(stone);  // Her seferinde 3 hamle geliyor. ilk hamlede taşı ilerletip 
-		      } 
-		      else   
-			  {   				
-				point = direction1.move(point); // sonraki iki hamlede ilerleyen taşı ilerletiyoruz.
-			  }
-			  sayi++;
-		}
-		
-		if(isInside(n,point) && !obstacles.contains(point))
-		 {
+		Point point =directionKnight.move(stone);
+		if (isInside(n,point) && !obstacles.contains(point) ) {   
 			result++;
 			pointList.add(point);
-		 }
+			point = directionKnight.move(point);
+		}
 		 
 		return result;
 	}

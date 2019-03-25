@@ -17,11 +17,11 @@ public class Runner {
 		Point stone = new Point(4, 3);
 		Set<Point> obstacles= new HashSet<>();
 		obstacles.add(new Point(5, 5));
-		//obstacles.add(new Point(4, 2));
+		obstacles.add(new Point(4, 2));
 		obstacles.add(new Point(2, 3));
-		int result =s.stonesAttack(n, stone, obstacles,Stones.PAWN.toString());
+		int result =s.stonesAttack(n, stone, obstacles,Stones.KNIGHT.toString());
 		System.out.println("aaa:"+s.pointList);
-		System.out.println("bbb"+s.pointPawnList);
+		//System.out.println("bbb"+s.pointPawnList);
 		System.out.println("result:"+result);
 	}
 
